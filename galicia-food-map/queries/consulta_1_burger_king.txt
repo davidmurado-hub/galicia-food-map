@@ -1,0 +1,7 @@
+[out:json][timeout:25];
+area["ISO3166-2"="ES-GA"]["admin_level"="4"]->.galicia;
+(
+  nwr(area.galicia)["brand"~"Burger King",i];
+  nwr(area.galicia)["name"~"Burger King",i];
+);
+out center;

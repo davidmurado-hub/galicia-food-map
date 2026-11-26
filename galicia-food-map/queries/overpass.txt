@@ -1,0 +1,9 @@
+[out:json][timeout:25];
+area["ISO3166-2"="ES-GA"]["admin_level"="4"]->.galicia;
+(
+  nwr(area.galicia)["brand"~"Burger King|McDon",i];
+  nwr(area.galicia)["name"~"Burger King|McDon",i];
+  nwr(area.galicia)["cuisine"~"kebab",i];
+  nwr(area.galicia)["name"~"kebab",i];
+);
+out center;
