@@ -1,66 +1,54 @@
 # Galicia Food Map
 [🌍 Launch interactive map](https://davidmurado-hub.github.io/galicia-food-map/)
-An interactive geospatial explorer of selected fast-food locations in Galicia, Spain, built using Python, JavaScript, Leaflet and OpenStreetMap data.
 
-## Features
 
-- Street, satellite and topographic basemaps (with topographic fallback).
-- Individual and clustered restaurant markers, with category-specific SVG icons.
-- Location counts for Burger King, McDonald's and kebab shops.
-- Popups with available cuisine information and a reference marker for Lalín.
-- Reproducible data import from Overpass JSON or GeoJSON, with deduplication by source identifier.
+Interactive map of Burger King, McDonald's and kebab locations in Galicia, Spain. Built with Leaflet and OpenStreetMap data processed in Python.
 
-## Quick start
+## Overview
 
-Requires Python 3.9+ for the local server and data preparation; no third-party Python packages are required.
+The application displays restaurant locations with category-specific markers, marker clustering, location counts and selectable street, satellite and topographic basemaps.
+
+Geospatial data is retrieved through the Overpass API, normalized in Python and stored as a local JavaScript dataset. The application runs entirely in the browser and requires no backend.
+
+## Getting started
+
+Requires Python 3.9 or later. No external Python packages are needed.
 
 ```bash
 python -m http.server 8000
 ```
 
-Open http://localhost:8000 in a browser. Internet access is required for map tiles and CDN libraries; restaurant records are bundled locally.
+Open [localhost:8000](http://localhost:8000). An internet connection is required for map tiles and Leaflet libraries.
 
-## Data pipeline
+## Data processing
 
-```text
-OpenStreetMap → Overpass queries → JSON / GeoJSON → Python normalization → local JS dataset → Leaflet map
-```
-
-Refresh from Overpass (replaces the snapshot):
+Update the dataset from OpenStreetMap:
 
 ```bash
 python scripts/prepare_data.py
 ```
 
-Or import bundled exports (merges by identifier with existing records):
+Alternatively, import the bundled GeoJSON files:
 
 ```bash
 python scripts/prepare_data.py --importar data/raw/restaurantes.geojson data/raw/kebabs.geojson
 ```
 
-## Project structure
+Run the unit tests:
 
-```text
-index.html         Web entry point
-assets/css/        Interface styles
-assets/js/         Map logic
-assets/icons/      SVG markers
-data/              Bundled dataset and raw exports
-queries/           Overpass queries
-scripts/           Python data preparation
-tests/             Offline unit tests
+```bash
+python -m unittest discover -s tests
 ```
 
-Run tests with `python -m unittest discover -s tests`.
+## Data sources
 
-## Data and limitations
+Restaurant data is provided by [OpenStreetMap contributors](https://www.openstreetmap.org/copyright) under the Open Database License (ODbL). Map tiles are provided by Esri and OpenTopoMap, subject to their respective terms.
 
-Data: [OpenStreetMap contributors](https://www.openstreetmap.org/copyright), under the Open Database License (ODbL). The bundled snapshot comes from the original project exports; the exact extraction timestamp is not documented. Counts reflect matching OSM records, not an exhaustive census of restaurants or guaranteed distinct physical businesses. Non-point geometries use an approximate vertex-average location when imported from GeoJSON. Map tiles are supplied by Esri and OpenTopoMap; provider terms apply. The Lalín photograph is linked rather than redistributed.
-
-## Deployment
-
-After obtaining permission to publish, enable GitHub Pages from Settings → Pages → Deploy from a branch → main → / (root). No build step is needed.
+The bundled dataset is a snapshot with an undocumented extraction date and does not represent an exhaustive inventory of restaurants. Locations derived from non-point geometries are approximate.
 
 ## Authors
 
-David Murado and Jorge Crespo. Originally developed as a university assignment and adapted for a portfolio presentation. Confirm both authors' consent and any course-material permissions before public release. No software license is asserted until the rights holders agree on one.
+David Murado and Jorge Crespo.
+
+Originally developed as a university project. No software license has been assigned.
+
