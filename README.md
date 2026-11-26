@@ -1,5 +1,5 @@
 # Galicia Food Map
-
+[🌍 Launch interactive map](https://davidmurado-hub.github.io/galicia-food-map/)
 An interactive geospatial explorer of selected fast-food locations in Galicia, Spain, built using Python, JavaScript, Leaflet and OpenStreetMap data.
 
 ## Features
